@@ -1,0 +1,42 @@
+### resolve typed identifiers -> stable node IDs
+POST http://127.0.0.1:8080/api/v1/graph/resolve
+Content-Type: application/json
+
+{
+  "ids": ["123", "456"],
+  "phoneNos": ["+79995556677"],
+  "partyRks": ["7700000000"]
+}
+
+### one-hop expansion from stable IDs
+POST http://127.0.0.1:8080/api/v1/graph/one-hop
+Content-Type: application/json
+
+{
+  "seeds": ["person:123", "company:7700000000"],
+  "cursor": "",
+  "limit": 50,
+  "edgeKinds": ["transfer", "contact"]
+}
+
+### one-hop expansion by typed identifiers (aliases supported)
+POST http://127.0.0.1:8080/api/v1/graph/one-hop
+Content-Type: application/json
+
+{
+  "ids": ["123"],
+  "phone_no": ["+79995556677"],
+  "party_rk": ["7700000000"],
+  "limit": 50
+}
+
+### shortest path between stable IDs
+POST http://127.0.0.1:8080/api/v1/graph/shortest-path
+Content-Type: application/json
+
+{
+  "from": "person:123",
+  "to": "phone:+79995556677",
+  "edgeKinds": ["transfer", "contact"],
+  "maxHops": 6
+}

@@ -1,0 +1,8 @@
+spring:
+  datasource:
+    url: jdbc:duckdb:./data/graph.duckdb
+    driver-class-name: org.duckdb.DuckDBDriver
+    hikari:
+      maximum-pool-size: 2
+  flyway:
+    locations: classpath:db/migration
